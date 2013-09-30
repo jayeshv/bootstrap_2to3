@@ -25,7 +25,7 @@ import re
 }
 
 
-class DirTravel(object):
+class TemplateFinder(object):
 
     def __init__(self, root_dir):
         pass
@@ -61,5 +61,7 @@ if __name__ == "__main__":
         root_folder = kos.get_cwd()
 
     #Create new folder
-    for each in DirTravel(root_folder):
-        TwoToThree(each)
+    for each in TemplateFinder(root_folder):
+        with open(each):
+            output = TwoToThree(each.read()).result()
+            each.write(output)
