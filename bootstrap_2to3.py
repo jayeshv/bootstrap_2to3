@@ -2,9 +2,10 @@ import os
 import sys
 import glob
 import re
+import fnmatch
 
 
-2to3_mapping = {
+class_mapping = {
     "container-fluid": "container",
     "row-fluid": "row",
     "brand": "navbar-brand",
@@ -22,21 +23,8 @@ import re
     "input-append": "input-group",
     "add-on": "input-group-addon",
     "btn-navbar": "navbar-btn",
-    "thumbnail": "img-thumbnail"
+    "thumbnail": "img-thumbnail",
 }
-
-
-class TemplateFinder(object):
-
-    def __init__(self, root_dir):
-        pass
-
-    def __iter__(self):
-        pass
-
-    def next(self):
-        pass
-
 
 class TwoToThree(object):
 
@@ -48,28 +36,33 @@ class TwoToThree(object):
         self.replace_span_classes()
         self.replace_btn_classes()
         return self.html
-
+        
     def replace_simple_classes(self):
-        for key, val in 2to3_mapping:
-            html = html.replace(key, val)
-        return html
+        for key, val in class_mapping.iteritems():
+            self.html = self.html.replace(key, val)
 
-    def replace_span_classes(self):        
+    def replace_span_classes(self):
         pass
 
     def replace_btn_classes(self):
         pass
 
 
+def get_template_files(root_dir):
+    for root, dirs, files in os.walk(root_dir):
+        for filename in fnmatch.filter(files, "*.html"):
+            yield (os.path.join(root, filename))
+
+
 if __name__ == "__main__":
     try:
-        root_folder = argv[1]
+        root_folder = sys.argv[1]
     except IndexError:
-        root_folder = os.getcwd()    
+        root_folder = os.getcwd()
     #FIXME: copy to a new directory before manipulating files
 
-    for each in TemplateFinder(root_folder):
+    for each in get_template_files(root_folder):
         with open(each, 'r') as fr:
             output = TwoToThree(fr.read()).convert()
-            with open(each, 'w') as fw:
-                fw.write(output)
+        with open(each, 'w') as fw:
+            fw.write(output)
