@@ -26,6 +26,7 @@ class_mapping = {
     "thumbnail": "img-thumbnail",
 }
 
+
 class TwoToThree(object):
 
     def __init__(self, html):
@@ -36,12 +37,14 @@ class TwoToThree(object):
         self.replace_span_classes()
         self.replace_btn_classes()
         return self.html
-        
+
     def replace_simple_classes(self):
         for key, val in class_mapping.iteritems():
             self.html = self.html.replace(key, val)
 
     def replace_span_classes(self):
+        #span = re.complie(r"span\d+")  #FIXME: add check to avoid span inside data
+        #re.sub(r"span\d", "col-md-")
         pass
 
     def replace_btn_classes(self):
