@@ -35,7 +35,7 @@ class TwoToThree(object):
     def convert(self):
         self.replace_simple_classes()
         self.replace_span_classes()
-        self.replace_btn_classes()
+        self.replace_offset_classes()
         return self.html
 
     def replace_simple_classes(self):
@@ -43,12 +43,14 @@ class TwoToThree(object):
             self.html = self.html.replace(key, val)
 
     def replace_span_classes(self):
-        #span = re.complie(r"span\d+")  #FIXME: add check to avoid span inside data
-        #re.sub(r"span\d", "col-md-")
-        pass
+        p = re.compile('span(?P<name>[1-9][0-2]?)', re.VERBOSE)
+        t = r'col-md-\g<1>'
+        self.html = p.sub(t, self.html)
 
-    def replace_btn_classes(self):
-        pass
+    def replace_offset_classes(self):
+        p = re.compile('offset(?P<name>[1-9][0-2]?)', re.VERBOSE)
+        t = r'col-md-offset-\g<1>'
+        self.html = p.sub(t, self.html)
 
 
 def get_template_files(root_dir):
