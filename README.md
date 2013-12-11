@@ -15,3 +15,17 @@ How to use
 python bootstrap_2to3.py <root-project-directory>
 
 This finds all .html files under the root folder and replaces bootstrap2 classes.
+
+
+As a library
+------------
+
+* pip install bootstrap_2to3
+
+    from bootstrap_2to3 import convert
+    
+    convert()  # To convert all .html files under current directory
+    convert('/user/works/project')  # To convert all .html files under given directory
+
+
+

@@ -59,15 +59,18 @@ def get_template_files(root_dir):
             yield (os.path.join(root, filename))
 
 
+def convert(root_folder):
+    for each in get_template_files(root_folder):
+        with open(each, 'r') as fr:
+            output = TwoToThree(fr.read()).convert()
+        with open(each, 'w') as fw:
+            fw.write(output)
+
+
 if __name__ == "__main__":
     try:
         root_folder = sys.argv[1]
     except IndexError:
         root_folder = os.getcwd()
     #FIXME: copy to a new directory before manipulating files
-
-    for each in get_template_files(root_folder):
-        with open(each, 'r') as fr:
-            output = TwoToThree(fr.read()).convert()
-        with open(each, 'w') as fw:
-            fw.write(output)
+    convert(root_folder)
