@@ -39,7 +39,7 @@ class TwoToThree(object):
         return self.html
 
     def replace_simple_classes(self):
-        for key, val in class_mapping.iteritems():
+        for key, val in class_mapping.items():
             self.html = self.html.replace(key, val)
 
     def replace_span_classes(self):
