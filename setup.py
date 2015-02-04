@@ -10,4 +10,8 @@ setup(
     license='BSD licence',
     description='Script to migrate bootstrap 2 templates to bootstrap3.',
     #long_description=open('README.md').read(),
+    classifiers=(
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3'
+    )
 )
