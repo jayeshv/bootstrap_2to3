@@ -22,10 +22,7 @@ As a library
 
 pip install bootstrap_2to3
 
-    from bootstrap_2to3.bootstrap_2to3 import convert
-    
+    from bootstrap_2to3 import convert
+
     convert()  # To convert all .html files under current directory
     convert('/user/works/project')  # To convert all .html files under given directory
-
-
-
