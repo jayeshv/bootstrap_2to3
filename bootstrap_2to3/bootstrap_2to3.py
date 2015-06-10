@@ -67,10 +67,14 @@ def convert(root_folder):
             fw.write(output)
 
 
-if __name__ == "__main__":
+def main():
     try:
         root_folder = sys.argv[1]
     except IndexError:
         root_folder = os.getcwd()
     #FIXME: copy to a new directory before manipulating files
     convert(root_folder)
+
+
+if __name__ == "__main__":
+    main()
